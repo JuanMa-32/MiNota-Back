@@ -1,11 +1,9 @@
 package com.juanma32.MiNotaEscolar.repositories;
 
 import com.juanma32.MiNotaEscolar.entities.Division;
-import com.juanma32.MiNotaEscolar.entities.Escuela;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EscuelaRepository extends JpaRepository<Escuela,Long> {
-
+public interface DivisionRepository extends JpaRepository<Division,Long> {
 }

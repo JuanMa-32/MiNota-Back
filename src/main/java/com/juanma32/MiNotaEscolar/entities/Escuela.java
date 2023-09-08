@@ -156,7 +156,7 @@ public class Escuela {
     private String equipamientoAdministrativos;
 
 //infraestructura Tecnologica-conectividad
-@Column(length = 30)
+    @Column(length = 30)
     private String conectividad;
     @Column(length = 30)
     private String proveedorServicio;
@@ -175,9 +175,6 @@ public class Escuela {
 
 
     //infraestructura edificia
-
-
-
     private Integer aulas;
     @NotBlank(message = "Campo Requerido")
     @Column(length = 30)
@@ -251,6 +248,9 @@ public class Escuela {
     private Boolean sistemaSeguridad;
 
     private Boolean senialCelular;
+
+    @OneToMany
+    private List<Division> division;
 
 
 
