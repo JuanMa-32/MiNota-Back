@@ -19,7 +19,7 @@ public class Division {
     @NotBlank(message = "campo obligatorio")
     private String curso;
     @NotBlank(message = "campo obligatorio")
-    private String division;
+    private String divisionCurso;
     @NotBlank(message = "campo obligatorio")
     private String turno;
     @NotBlank(message = "campo obligatorio")
@@ -30,10 +30,12 @@ public class Division {
     private String modalidad;
     @NotNull(message = "fecha de alta obligatoria")
     @Temporal(TemporalType.DATE)
-
     private Date alta;
     @Temporal(TemporalType.DATE)
     private Date baja;
+
+    @OneToOne
+    private Cargo cargo;
 
 
 

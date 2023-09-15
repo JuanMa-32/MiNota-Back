@@ -249,7 +249,7 @@ public class Escuela {
 
     private Boolean senialCelular;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Division> division;
 
 
