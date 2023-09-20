@@ -26,7 +26,6 @@ public class EscuelaController {
 
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Escuela escuela, BindingResult result) {
-        System.out.println("hola");
         if (result.hasErrors()) {
             return validation(result);
         }

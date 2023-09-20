@@ -34,10 +34,5 @@ public class Division {
     @Temporal(TemporalType.DATE)
     private Date baja;
 
-    @OneToOne
-    private Cargo cargo;
-
-
-
 
 }

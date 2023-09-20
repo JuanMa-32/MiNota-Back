@@ -3,6 +3,8 @@ package com.juanma32.MiNotaEscolar.services;
 import com.juanma32.MiNotaEscolar.entities.Cargo;
 import com.juanma32.MiNotaEscolar.repositories.CargoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,8 +27,13 @@ public class CargoServiceImpl implements CargoService{
     }
 
     @Override
-    public List<Cargo> findAll() {
-        return repository.findAll();
+    public List<Cargo> findAll(Long id) {
+        return null;
+    }
+
+    @Override
+    public Page<Cargo> findAll(Long id,Pageable pageable) {
+        return repository.findCargosByEscuelaId(id,pageable);
     }
 
     @Override

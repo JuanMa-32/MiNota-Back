@@ -1,5 +1,6 @@
 package com.juanma32.MiNotaEscolar.services;
 
+import com.juanma32.MiNotaEscolar.entities.Cargo;
 import com.juanma32.MiNotaEscolar.entities.Escuela;
 import com.juanma32.MiNotaEscolar.repositories.EscuelaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,6 @@ public class EscuelaServiceImpl implements EscuelaService{
     public Optional<Escuela> findById(Long id) {
         return repository.findById(id);
     }
+
+
 }

@@ -251,7 +251,8 @@ public class Escuela {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Division> division;
-
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cargo> cargo;
 
 
 }
