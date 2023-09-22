@@ -43,6 +43,39 @@ public class CargoController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@Valid @RequestBody Cargo cargo, BindingResult result,@PathVariable Long id){
+        Optional<Cargo> o = service.findById(id);
+        if(o.isPresent()){
+            if(result.hasErrors()){
+                return validation(result);
+            }
+            Cargo cargoDb = o.get();
+            cargoDb.setTurno(cargo.getTurno());
+            cargoDb.setResolucionCreacion(cargo.getResolucionCreacion());
+            cargoDb.setCodigoJunta(cargo.getCodigoJunta());
+            return ResponseEntity.status(201).body(service.save(cargoDb));
+        }
+        return ResponseEntity.notFound().build();
+     }
+
+     @DeleteMapping("/{id}/{idEscuela}")
+     public ResponseEntity<?> remove(@PathVariable Long id,@PathVariable Long idEscuela){
+         System.out.println("entre");
+        Optional<Cargo> o = service.findById(id);
+         Optional<Escuela> oEsc = serviceEsc.findById(idEscuela);
+        if(oEsc.isPresent()){
+            Escuela escuela = oEsc.get();
+            List<Cargo> cargos = escuela.getCargo();
+            Cargo cargo = o.get();
+            System.out.println(cargo);
+            cargos.remove(cargo);
+            serviceEsc.save(escuela);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.badRequest().build();
+     }
+
     @GetMapping("/{id}/{page}")
     public ResponseEntity<?> findAllCargos(@PathVariable Long id,@PathVariable Integer page){
         Pageable pageable = PageRequest.of(page,10);

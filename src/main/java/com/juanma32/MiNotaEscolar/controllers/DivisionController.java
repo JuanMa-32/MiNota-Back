@@ -70,7 +70,7 @@ public class DivisionController {
             Division division = o.get();
             div.remove(division);
             serviceEsc.save(escuela);
-            System.out.println(escuela);
+
             return ResponseEntity.noContent().build();//204
         }
         return  ResponseEntity.notFound().build();
