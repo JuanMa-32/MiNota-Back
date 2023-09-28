@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity
 @Table(name = "cargos")
 @Data
@@ -34,4 +36,6 @@ public class Cargo {
 
     @OneToOne
     private Division division;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Servicio> servicio;
 }
