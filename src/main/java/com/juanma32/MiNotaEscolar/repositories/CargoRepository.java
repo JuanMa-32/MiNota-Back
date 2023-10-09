@@ -5,9 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo,Long> {
@@ -18,4 +20,7 @@ public interface CargoRepository extends JpaRepository<Cargo,Long> {
             "INNER JOIN ESCUELAS_CARGO ON CARGOS.ID = ESCUELAS_CARGO.CARGO_ID " +
             "WHERE ESCUELAS_CARGO.ESCUELA_ID = :escuelaId", nativeQuery = true)
     Page<Cargo> findCargosByEscuelaId(Long escuelaId,Pageable pageable);
+
+    Optional<Cargo> findByDivisionId(Long idDivision);
+
 }

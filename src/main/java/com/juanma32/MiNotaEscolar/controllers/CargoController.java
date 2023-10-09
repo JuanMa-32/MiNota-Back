@@ -78,7 +78,7 @@ public class CargoController {
 
     @GetMapping("/{id}/{page}")
     public ResponseEntity<?> findAllCargos(@PathVariable Long id,@PathVariable Integer page){
-        Pageable pageable = PageRequest.of(page,10);
+        Pageable pageable = PageRequest.of(page,3);
        return ResponseEntity.ok(service.findAll(id,pageable));
     }
 

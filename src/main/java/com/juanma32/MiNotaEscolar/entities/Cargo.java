@@ -1,5 +1,7 @@
 package com.juanma32.MiNotaEscolar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -21,7 +23,6 @@ public class Cargo {
     private String fundamento;
 
     private String carrera;
-
     private String materia;
     @NotBlank(message = "Campo obligatorio")
     private String regimen;
@@ -36,6 +37,7 @@ public class Cargo {
 
     @OneToOne
     private Division division;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Servicio> servicio;
 }

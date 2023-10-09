@@ -47,11 +47,8 @@ public class Usuario {
     private String casa;
 
     private String referenciaDomicilio;
-
     private String nivelEstudio;
-
     private String ocupacion;
-
     private Integer telefonoFijo;
     private String prestadora;
     private Integer celular;

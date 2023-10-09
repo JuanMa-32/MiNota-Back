@@ -14,4 +14,7 @@ public interface CargoService {
     List<Cargo> findAll(Long id);
     Page<Cargo> findAll(Long id,Pageable pageable);
     void deleteById(Long id);
+
+    Optional<Cargo> findByDivision(Long idDivision);
+
 }

@@ -1,7 +1,9 @@
 package com.juanma32.MiNotaEscolar.controllers;
 
+import com.juanma32.MiNotaEscolar.entities.Cargo;
 import com.juanma32.MiNotaEscolar.entities.Division;
 import com.juanma32.MiNotaEscolar.entities.Escuela;
+import com.juanma32.MiNotaEscolar.services.CargoServiceImpl;
 import com.juanma32.MiNotaEscolar.services.DivisionServiceImpl;
 import com.juanma32.MiNotaEscolar.services.EscuelaServiceImpl;
 import jakarta.validation.Valid;
@@ -24,6 +26,8 @@ public class DivisionController {
     private DivisionServiceImpl service;
     @Autowired
     private EscuelaServiceImpl serviceEsc;
+    @Autowired
+    private CargoServiceImpl serviceCargo;
 
     @PostMapping("/agregar/{id}")
     public ResponseEntity<?> save(@Valid @RequestBody Division division,BindingResult result, @PathVariable Long id) {
@@ -92,6 +96,17 @@ public class DivisionController {
         if(o.isPresent()){
             Division division = o.get();
             return ResponseEntity.ok(division);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    //traigo el cargo que tiene asociado la Division
+    @GetMapping("/cargoDivision/{id}")
+    public ResponseEntity<?> findCargo(@PathVariable Long id){
+        Optional<Cargo> o = serviceCargo.findByDivision(id);
+        if(o.isPresent()){
+            Cargo cargo = o.get();
+            return ResponseEntity.ok(cargo);
         }
         return ResponseEntity.notFound().build();
     }

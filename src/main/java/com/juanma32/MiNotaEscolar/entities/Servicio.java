@@ -1,5 +1,8 @@
 package com.juanma32.MiNotaEscolar.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,6 +24,7 @@ public class Servicio {
     @NotBlank(message = "campo obligatorio")
     private String situacionRevista;
     @Temporal(TemporalType.DATE)
+    @NotNull(message = "campo Obligatorio")
     private Date alta;
     @Temporal(TemporalType.DATE)
     private Date baja;
@@ -33,5 +37,10 @@ public class Servicio {
     private String funcion;
     @NotBlank(message = "campo obligatorio")
     private String observacion;
+
+    @JsonIgnoreProperties("servicio")
+    @ManyToOne
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
 
 }
