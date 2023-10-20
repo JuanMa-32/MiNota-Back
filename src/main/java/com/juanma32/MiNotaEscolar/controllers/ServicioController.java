@@ -15,10 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/servicio")
@@ -57,12 +54,27 @@ public class ServicioController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/baja/{id}")
+    public ResponseEntity<?> darBaja(@PathVariable Long id,@RequestParam String motivoBaja,@RequestParam Date baja){
+        Optional<Servicio> o = service.findById(id);
+        if(o.isPresent()){
+            Servicio servicio = o.get();
+            servicio.setBaja(baja);
+            servicio.setMotivoBaja(motivoBaja);
+            service.save(servicio);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping("/{idEscuela}/{page}")
     public ResponseEntity<?> findAll(@PathVariable Long idEscuela, @PathVariable Integer page) {
         Pageable pageable = PageRequest.of(page, 10);
 
         return ResponseEntity.ok(service.findAll(pageable, idEscuela));
     }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {

@@ -3,12 +3,14 @@ package com.juanma32.MiNotaEscolar.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "usuarios")
-@Data
+@Getter@Setter
+@AllArgsConstructor @NoArgsConstructor
 public class Usuario {
 
     @Id
@@ -29,21 +31,21 @@ public class Usuario {
     private Date nacimiento;
     @NotBlank(message = "Campo obligatorio")
     private String calle;
-    @NotNull(message = "Campo obligatorio")
+
     private Integer numero;
-    @NotBlank(message = "Campo obligatorio")
+
     private String depto;
-    @NotBlank(message = "Campo obligatorio")
+
     private String piso;
-    @OneToOne
+    @ManyToOne
     private Localidad localidad;
     @NotNull(message = "Campo obligatorio")
     private Integer codigoPostal;
     @NotBlank(message = "Campo obligatorio")
     private String barrio;
-    @NotBlank(message = "Campo obligatorio")
+
     private String manzana;
-    @NotBlank(message = "Campo obligatorio")
+
     private String casa;
 
     private String referenciaDomicilio;

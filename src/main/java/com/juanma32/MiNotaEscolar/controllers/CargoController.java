@@ -54,6 +54,7 @@ public class CargoController {
             cargoDb.setTurno(cargo.getTurno());
             cargoDb.setResolucionCreacion(cargo.getResolucionCreacion());
             cargoDb.setCodigoJunta(cargo.getCodigoJunta());
+            cargoDb.setObservacion(cargo.getObservacion());
             return ResponseEntity.status(201).body(service.save(cargoDb));
         }
         return ResponseEntity.notFound().build();
@@ -61,7 +62,7 @@ public class CargoController {
 
      @DeleteMapping("/{id}/{idEscuela}")
      public ResponseEntity<?> remove(@PathVariable Long id,@PathVariable Long idEscuela){
-         System.out.println("entre");
+
         Optional<Cargo> o = service.findById(id);
          Optional<Escuela> oEsc = serviceEsc.findById(idEscuela);
         if(oEsc.isPresent()){
@@ -78,7 +79,7 @@ public class CargoController {
 
     @GetMapping("/{id}/{page}")
     public ResponseEntity<?> findAllCargos(@PathVariable Long id,@PathVariable Integer page){
-        Pageable pageable = PageRequest.of(page,3);
+        Pageable pageable = PageRequest.of(page,10);
        return ResponseEntity.ok(service.findAll(id,pageable));
     }
 

@@ -38,6 +38,8 @@ public class Servicio {
     @NotBlank(message = "campo obligatorio")
     private String observacion;
 
+  private String motivoBaja;
+
     @JsonIgnoreProperties("servicio")
     @ManyToOne
     @JoinColumn(name = "cargo_id")

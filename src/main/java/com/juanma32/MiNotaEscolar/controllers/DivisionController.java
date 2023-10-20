@@ -37,10 +37,10 @@ public class DivisionController {
                 return validation(result);
             }
             Escuela escuela = o.get();
-            System.out.println(escuela);
+
             List<Division> div= escuela.getDivision();
-            System.out.println(div);
-            div.add( service.save(division));
+
+            div.add(service.save(division));
             escuela.setDivision(div);
             return ResponseEntity.status(201).body(serviceEsc.save(escuela));
         }

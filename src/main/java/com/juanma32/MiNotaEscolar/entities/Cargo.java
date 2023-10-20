@@ -35,6 +35,7 @@ public class Cargo {
     @NotBlank(message = "Campo obligatorio")
     private String codigoJunta;
 
+    private String observacion;
     @OneToOne
     private Division division;
 
