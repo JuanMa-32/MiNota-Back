@@ -36,5 +36,10 @@ public class ServicioServiceImpl implements ServicioService {
         return repository.findAll(page, idEscuela);
     }
 
+    @Override
+    public Optional<Servicio> findByCargoId(Long idCargo) {
+        return repository.findByCargoId(idCargo);
+    }
+
 
 }

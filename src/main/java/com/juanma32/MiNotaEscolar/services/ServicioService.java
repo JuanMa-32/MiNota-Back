@@ -13,6 +13,6 @@ public interface ServicioService {
 
     Page<Servicio> findAll(Pageable page,Long idEscuela);
 
-
+Optional<Servicio> findByCargoId(Long idCargo);
 
 }

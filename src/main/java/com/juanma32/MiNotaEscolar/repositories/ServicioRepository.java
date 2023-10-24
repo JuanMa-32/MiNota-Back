@@ -22,4 +22,5 @@ public interface ServicioRepository extends JpaRepository<Servicio,Long> {
     Page<Servicio> findAll(Pageable page, Long idEscuela);
 
 
+Optional<Servicio> findByCargoId(Long idCargo);
 }

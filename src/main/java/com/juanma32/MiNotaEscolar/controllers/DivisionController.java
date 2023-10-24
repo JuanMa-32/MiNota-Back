@@ -68,10 +68,19 @@ public class DivisionController {
      public ResponseEntity<?> delete(@PathVariable Long idEsc,@PathVariable Long id){
          Optional<Escuela> oEsc = serviceEsc.findById(idEsc);
          Optional<Division> o = service.findById(id);
+         Optional<Cargo> oCargo = serviceCargo.findByDivision(id);
          if(oEsc.isPresent()){
             Escuela escuela = oEsc.get();
+
             List<Division> div = escuela.getDivision();
             Division division = o.get();
+
+            //busco si esta division tiene un cargo y elimino primero el cargo
+             if(oCargo.isPresent()){
+                 Cargo cargo = oCargo.get();
+                 List<Cargo> cargos = escuela.getCargo();
+                 cargos.remove(cargo);
+             }
             div.remove(division);
             serviceEsc.save(escuela);
 

@@ -2,8 +2,10 @@ package com.juanma32.MiNotaEscolar.controllers;
 
 import com.juanma32.MiNotaEscolar.entities.Cargo;
 import com.juanma32.MiNotaEscolar.entities.Escuela;
+import com.juanma32.MiNotaEscolar.entities.Servicio;
 import com.juanma32.MiNotaEscolar.services.CargoServiceImpl;
 import com.juanma32.MiNotaEscolar.services.EscuelaServiceImpl;
+import com.juanma32.MiNotaEscolar.services.ServicioServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +28,8 @@ public class CargoController {
     private CargoServiceImpl service;
     @Autowired
     private EscuelaServiceImpl serviceEsc;
+    @Autowired
+    private ServicioServiceImpl serviceServicio;
 
 
     @PostMapping("/{id}")
@@ -65,11 +69,16 @@ public class CargoController {
 
         Optional<Cargo> o = service.findById(id);
          Optional<Escuela> oEsc = serviceEsc.findById(idEscuela);
+         Optional<Servicio> oServicio = serviceServicio.findByCargoId(id);
         if(oEsc.isPresent()){
             Escuela escuela = oEsc.get();
             List<Cargo> cargos = escuela.getCargo();
             Cargo cargo = o.get();
-            System.out.println(cargo);
+            //me fijo si este cargo tiene un servicio relacionado para eliminarlo antes de eliminar el cargo
+            if(oServicio.isPresent()){
+                Servicio servicio = oServicio.get();
+                servicio.setCargo(null);
+            }
             cargos.remove(cargo);
             serviceEsc.save(escuela);
             return ResponseEntity.noContent().build();

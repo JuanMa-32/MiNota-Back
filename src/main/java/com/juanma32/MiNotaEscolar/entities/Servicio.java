@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "servicios")
@@ -35,14 +37,17 @@ public class Servicio {
     private String obligacion;
     @NotBlank(message = "campo obligatorio")
     private String funcion;
-    @NotBlank(message = "campo obligatorio")
+
     private String observacion;
 
-  private String motivoBaja;
+    private String motivoBaja;
 
     @JsonIgnoreProperties("servicio")
     @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo cargo;
+
+    @OneToMany
+    private List<Novedad> novedades;
 
 }

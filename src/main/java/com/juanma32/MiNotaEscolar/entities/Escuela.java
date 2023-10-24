@@ -26,7 +26,7 @@ public class Escuela {
     @NotBlank(message = "Campo Requerido")
     @Column(length = 30)
     private String cue;
-    @NotBlank(message = "Campo Requerido")
+
     @Column(length = 30)
     private String subCue;
     @NotBlank(message = "Campo Requerido")
@@ -62,10 +62,10 @@ public class Escuela {
     @NotBlank(message = "Campo Requerido")
     @Column(length = 30)
     private String comparteEdificio;
-    @NotBlank(message = "Campo Requerido")
+
     @Column(length = 30)
     private String calle;
-    @NotBlank(message = "Campo Requerido")
+
     @Column(length = 30)
     private String numeroCalle;
     @Column(length = 30)

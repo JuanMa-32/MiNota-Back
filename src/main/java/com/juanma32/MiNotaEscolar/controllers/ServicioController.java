@@ -7,10 +7,8 @@ import com.juanma32.MiNotaEscolar.services.ServicioServiceImpl;
 import com.juanma32.MiNotaEscolar.services.UsuarioServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +52,17 @@ public class ServicioController {
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<?> edit( @RequestBody Servicio servicio,@PathVariable Long id){
+        Optional<Servicio> o = service.findById(id);
+        if(o.isPresent()){
+            Servicio serv = o.get();
+            serv.setObservacion(servicio.getObservacion());
+            return ResponseEntity.status(201).body(service.save(serv));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PutMapping("/baja/{id}")
     public ResponseEntity<?> darBaja(@PathVariable Long id,@RequestParam String motivoBaja,@RequestParam Date baja){
         Optional<Servicio> o = service.findById(id);
@@ -75,7 +84,6 @@ public class ServicioController {
     }
 
 
-
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<Servicio> o = service.findById(id);
@@ -87,8 +95,6 @@ public class ServicioController {
 
         return ResponseEntity.notFound().build();
     }
-
-
 
 
     private ResponseEntity<?> validation(BindingResult result) {
