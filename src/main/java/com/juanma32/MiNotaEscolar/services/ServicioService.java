@@ -9,10 +9,11 @@ import java.util.Optional;
 
 public interface ServicioService {
     Servicio save(Servicio servicio);
+
     Optional<Servicio> findById(Long id);
 
-    Page<Servicio> findAll(Pageable page,Long idEscuela);
+    Page<Servicio> findAll( Long idEscuela, int mes, int anio,Pageable page);
 
-Optional<Servicio> findByCargoId(Long idCargo);
+    Optional<Servicio> findByCargoId(Long idCargo);
 
 }

@@ -32,8 +32,8 @@ public class ServicioServiceImpl implements ServicioService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Servicio> findAll(Pageable page, Long idEscuela) {
-        return repository.findAll(page, idEscuela);
+    public Page<Servicio> findAll( Long idEscuela,int mes,int anio,Pageable page) {
+        return repository.findAllPorMesYAnio( idEscuela, mes, anio,page);
     }
 
     @Override

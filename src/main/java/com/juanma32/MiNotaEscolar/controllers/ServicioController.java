@@ -53,9 +53,9 @@ public class ServicioController {
     }
 
     @PutMapping("/edit/{id}")
-    public ResponseEntity<?> edit( @RequestBody Servicio servicio,@PathVariable Long id){
+    public ResponseEntity<?> edit(@RequestBody Servicio servicio, @PathVariable Long id) {
         Optional<Servicio> o = service.findById(id);
-        if(o.isPresent()){
+        if (o.isPresent()) {
             Servicio serv = o.get();
             serv.setObservacion(servicio.getObservacion());
             return ResponseEntity.status(201).body(service.save(serv));
@@ -64,9 +64,9 @@ public class ServicioController {
     }
 
     @PutMapping("/baja/{id}")
-    public ResponseEntity<?> darBaja(@PathVariable Long id,@RequestParam String motivoBaja,@RequestParam Date baja){
+    public ResponseEntity<?> darBaja(@PathVariable Long id, @RequestParam String motivoBaja, @RequestParam Date baja) {
         Optional<Servicio> o = service.findById(id);
-        if(o.isPresent()){
+        if (o.isPresent()) {
             Servicio servicio = o.get();
             servicio.setBaja(baja);
             servicio.setMotivoBaja(motivoBaja);
@@ -77,10 +77,10 @@ public class ServicioController {
     }
 
     @GetMapping("/{idEscuela}/{page}")
-    public ResponseEntity<?> findAll(@PathVariable Long idEscuela, @PathVariable Integer page) {
+    public ResponseEntity<?> findAll(@PathVariable Long idEscuela, @PathVariable Integer page, @RequestParam int mes, @RequestParam int anio) {
         Pageable pageable = PageRequest.of(page, 10);
 
-        return ResponseEntity.ok(service.findAll(pageable, idEscuela));
+        return ResponseEntity.ok(service.findAll(idEscuela, mes, anio, pageable));
     }
 
 
