@@ -70,8 +70,21 @@ public class ServicioController {
             Servicio servicio = o.get();
             servicio.setBaja(baja);
             servicio.setMotivoBaja(motivoBaja);
-            service.save(servicio);
-            return ResponseEntity.noContent().build();
+
+            return ResponseEntity.status(201).body(service.save(servicio));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/anular_baja/{id}")
+    public ResponseEntity<?> anularBaja(@PathVariable Long id) {
+        Optional<Servicio> o = service.findById(id);
+        if (o.isPresent()) {
+            Servicio servicio = o.get();
+            servicio.setBaja(null);
+            servicio.setMotivoBaja(null);
+
+            return ResponseEntity.status(201).body(service.save(servicio));
         }
         return ResponseEntity.notFound().build();
     }
