@@ -25,30 +25,26 @@ public class Usuario {
     private String apellido;
     @NotBlank(message = "Campo obligatorio")
     private String nombre;
-    @NotBlank(message = "Campo obligatorio")
     private String genero;
     @Temporal(TemporalType.DATE)
     private Date nacimiento;
-    @NotBlank(message = "Campo obligatorio")
+
+    //datos domicilio
+
     private String calle;
-
     private Integer numero;
-
     private String depto;
-
     private String piso;
     @ManyToOne
     private Localidad localidad;
-    @NotNull(message = "Campo obligatorio")
+
     private Integer codigoPostal;
-    @NotBlank(message = "Campo obligatorio")
     private String barrio;
-
     private String manzana;
-
     private String casa;
-
     private String referenciaDomicilio;
+
+    //datos personales
     private String nivelEstudio;
     private String ocupacion;
     private Integer telefonoFijo;
@@ -59,4 +55,12 @@ public class Usuario {
     private String grupoSanguineo;
     private String lugarNacimiento;
     private String nacionalidad;
+
+    //alumnos
+    private String condicion;
+    @Temporal(TemporalType.DATE)
+    private Date desde;
+    private String causaEntrada;
+    @Temporal(TemporalType.DATE)
+    private Date cicloLectivo;
 }
