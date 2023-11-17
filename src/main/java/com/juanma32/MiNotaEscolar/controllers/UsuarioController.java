@@ -5,8 +5,9 @@ import com.juanma32.MiNotaEscolar.entities.Usuario;
 import com.juanma32.MiNotaEscolar.services.DivisionServiceImpl;
 import com.juanma32.MiNotaEscolar.services.UsuarioServiceImpl;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -59,8 +60,9 @@ public class UsuarioController {
 
             //traigo la lista de alumnos de la division y guardo el usuario.
             division.getAlumnos().add(usuario);
+            serviceDivision.save(division);
 
-            return ResponseEntity.status(201).body(serviceDivision.save(division));
+            return ResponseEntity.status(201).body(division.getAlumnos());
         }
         return ResponseEntity.notFound().build();
     }
@@ -86,6 +88,7 @@ public class UsuarioController {
             alumnoDb.setReferenciaDomicilio(alumno.getReferenciaDomicilio());
 
             //datos personales
+            alumnoDb.setGenero(alumno.getGenero());
             alumnoDb.setEstadoCivil(alumno.getEstadoCivil());
             alumnoDb.setOcupacion(alumno.getOcupacion());
             alumnoDb.setNivelEstudio(alumno.getNivelEstudio());
@@ -111,15 +114,21 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/alumno/buscar/{page}")
+    public ResponseEntity<?> findByAlumno(@PathVariable int page,@RequestParam String nombre,@RequestParam String apellido){
+        Pageable pageable = PageRequest.of(page,5);
+        return ResponseEntity.ok(service.findByNombreAndApellido(nombre,apellido,pageable));
+    }
+
     @GetMapping("/ver/{dni}")
     public ResponseEntity<?> findByDni(@PathVariable Integer dni) {
         return ResponseEntity.ok(service.findByDni(dni));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable Long id){
+    public ResponseEntity<?> findById(@PathVariable Long id) {
         Optional<Usuario> o = service.findById(id);
-        if(o.isPresent()){
+        if (o.isPresent()) {
             Usuario alumno = o.get();
             return ResponseEntity.ok(alumno);
         }

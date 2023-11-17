@@ -3,6 +3,8 @@ package com.juanma32.MiNotaEscolar.services;
 import com.juanma32.MiNotaEscolar.entities.Usuario;
 import com.juanma32.MiNotaEscolar.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,4 +35,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario save(Usuario usuario) {
         return repository.save(usuario);
     }
+
+    @Override
+    public Page<Usuario> findByNombreAndApellido(String nombre, String apellido, Pageable pageable) {
+        return repository.findByNombreContainingAndApellidoContaining(nombre,apellido,pageable);
+    }
+
+
 }

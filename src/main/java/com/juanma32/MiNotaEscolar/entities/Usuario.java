@@ -61,6 +61,6 @@ public class Usuario {
     @Temporal(TemporalType.DATE)
     private Date desde;
     private String causaEntrada;
-    @Temporal(TemporalType.DATE)
-    private Date cicloLectivo;
+
+    private String cicloLectivo;
 }
