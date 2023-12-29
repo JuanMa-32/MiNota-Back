@@ -174,7 +174,7 @@ public class Escuela {
     private String funciona;
 
 
-    //infraestructura edificia
+    //infraestructura edilicia
     private Integer aulas;
     @NotBlank(message = "Campo Requerido")
     @Column(length = 30)

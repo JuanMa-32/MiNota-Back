@@ -1,5 +1,6 @@
 package com.juanma32.MiNotaEscolar.controllers;
 
+import com.juanma32.MiNotaEscolar.Enums.Role;
 import com.juanma32.MiNotaEscolar.entities.Cargo;
 import com.juanma32.MiNotaEscolar.entities.Servicio;
 import com.juanma32.MiNotaEscolar.services.CargoService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +28,8 @@ public class ServicioController {
     private UsuarioServiceImpl servicePers;
     @Autowired
     private CargoService serviceCar;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @PostMapping("/{idCargo}")
@@ -40,6 +44,8 @@ public class ServicioController {
             List<Servicio> servicios = cargo.getServicio();
 
             if (servicio.getUsuario().getId() == null) {
+                servicio.getUsuario().setPassword(passwordEncoder.encode("123456"));
+                servicio.getUsuario().setRole(Role.MAESTRO);
                 servicePers.save(servicio.getUsuario());
             }
             servicio.setCargo(cargo);//guardo en servicio el cargo

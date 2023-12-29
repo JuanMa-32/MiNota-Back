@@ -1,5 +1,6 @@
 package com.juanma32.MiNotaEscolar.controllers;
 
+import com.juanma32.MiNotaEscolar.Enums.Role;
 import com.juanma32.MiNotaEscolar.entities.Division;
 import com.juanma32.MiNotaEscolar.entities.Usuario;
 import com.juanma32.MiNotaEscolar.services.DivisionServiceImpl;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +29,8 @@ public class UsuarioController {
     private UsuarioServiceImpl service;
     @Autowired
     private DivisionServiceImpl serviceDivision;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/agregar_alumno/nuevo/{idDivision}")
     public ResponseEntity<?> agregarAlumno(@Valid @RequestBody Usuario alumno, BindingResult result, @PathVariable Long idDivision) {
@@ -40,6 +44,8 @@ public class UsuarioController {
             List<Usuario> alumnos = division.getAlumnos();
 
             //guardo el alumno en la db y en la lista
+            alumno.setPassword(passwordEncoder.encode("123456"));
+            alumno.setRole(Role.ALUMNO);
             Usuario alumnoDB = service.save(alumno);
             alumnos.add(alumnoDB);
             //guardo la division con el alumno ya seteado

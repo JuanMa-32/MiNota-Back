@@ -10,6 +10,7 @@ public interface UsuarioService {
     List<Usuario> findAll();
 
     Optional<Usuario> findById(Long id);
+    Optional<Usuario> findByEmail(String email);
 
     Optional<Usuario> findByDni(Integer dni);
 

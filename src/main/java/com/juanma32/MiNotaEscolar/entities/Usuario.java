@@ -1,5 +1,6 @@
 package com.juanma32.MiNotaEscolar.entities;
 
+import com.juanma32.MiNotaEscolar.Enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,6 +29,11 @@ public class Usuario {
     private String genero;
     @Temporal(TemporalType.DATE)
     private Date nacimiento;
+
+    private String email;
+    private String password;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     //datos domicilio
 
@@ -63,4 +69,6 @@ public class Usuario {
     private String causaEntrada;
 
     private String cicloLectivo;
+
+    
 }

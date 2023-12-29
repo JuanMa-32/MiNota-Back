@@ -16,6 +16,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
+
     @Override
     public List<Usuario> findAll() {
         return repository.findAll();
@@ -24,6 +25,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Optional<Usuario> findById(Long id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public Optional<Usuario> findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     @Override

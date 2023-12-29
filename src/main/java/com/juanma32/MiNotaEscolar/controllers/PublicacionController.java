@@ -3,7 +3,6 @@ package com.juanma32.MiNotaEscolar.controllers;
 import com.juanma32.MiNotaEscolar.entities.Publicacion;
 import com.juanma32.MiNotaEscolar.services.PublicacionServiceImpl;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
